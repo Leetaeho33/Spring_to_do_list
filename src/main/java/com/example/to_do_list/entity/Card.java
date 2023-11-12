@@ -1,11 +1,14 @@
 package com.example.to_do_list.entity;
 
+import com.example.to_do_list.dto.CardRequestDto;
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 
 @Entity
+@NoArgsConstructor
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +22,12 @@ public class Card {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public Card (CardRequestDto cardRequestDto){
+        this.title = cardRequestDto.getTitle();
+        this.content = cardRequestDto.getContent();
+        this.user = cardRequestDto.getUser();
+        this.dateTime = dateTime.now();
+    }
 
 }

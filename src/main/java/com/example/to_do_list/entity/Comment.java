@@ -1,5 +1,6 @@
 package com.example.to_do_list.entity;
 
+import com.example.to_do_list.dto.CommentRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +24,13 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "card_id")
     private Card card;
+
+    public Comment (CommentRequestDto commentRequestDto){
+        this.content = commentRequestDto.getContent();
+        this.card = commentRequestDto.getCard();
+        this.dateTime = dateTime.now();
+
+    }
+
 
 }

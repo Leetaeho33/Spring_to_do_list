@@ -21,7 +21,7 @@ public class User {
     private String pwd;
 
     public User(UserRequestDto userRequestDto) {
-        this.username = username;
-        this.pwd = pwd;
+        this.username = userRequestDto.getUsername();
+        this.pwd = userRequestDto.getPwd();
     }
 }
