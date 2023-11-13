@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table(name = "comment")
 @Getter
 @NoArgsConstructor
-public class Comment {
+public class Comment extends Time{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
