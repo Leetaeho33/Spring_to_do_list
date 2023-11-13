@@ -2,14 +2,16 @@ package com.example.to_do_list.entity;
 
 import com.example.to_do_list.dto.CardRequestDto;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 
+@Getter
 @Entity
 @NoArgsConstructor
-public class Card {
+public class Card extends Time{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
