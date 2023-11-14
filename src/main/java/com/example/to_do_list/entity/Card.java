@@ -19,17 +19,19 @@ public class Card extends Time{
     private String title;
     @Column(name = "content", nullable = false)
     private String content;
-    @Column(name = "date", nullable = false)
-    private LocalDateTime dateTime;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
 
     public Card (CardRequestDto cardRequestDto){
         this.title = cardRequestDto.getTitle();
         this.content = cardRequestDto.getContent();
-        this.user = cardRequestDto.getUser();
-        this.dateTime = dateTime.now();
-    }
+//        this.user = cardRequestDto.getUser();
 
+    }
+    public void update(CardRequestDto card){
+        this.title = card.getTitle();
+        this.content = card.getContent();
+
+    }
 }

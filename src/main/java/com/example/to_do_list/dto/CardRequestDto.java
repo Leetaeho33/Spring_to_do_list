@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class CardRequestDto {
     private String title;
     private String content;
-    private LocalDateTime dateTime;
-    private User user;
+//    private User user;
 
 }
