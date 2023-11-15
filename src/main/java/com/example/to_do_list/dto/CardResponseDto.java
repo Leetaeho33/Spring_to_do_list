@@ -1,10 +1,14 @@
 package com.example.to_do_list.dto;
 
 import com.example.to_do_list.entity.Card;
+import com.example.to_do_list.entity.Comment;
 import com.example.to_do_list.entity.User;
 import lombok.Getter;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class CardResponseDto {
@@ -13,6 +17,7 @@ public class CardResponseDto {
     private String content;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private List<Comment> comments;
 //    private String username;
 
     public CardResponseDto(Card card) {
@@ -21,6 +26,7 @@ public class CardResponseDto {
         this.content = card.getContent();
         this.createdAt = card.getCreatedAt();
         this.modifiedAt = card.getModifiedAt();
+        this.comments = new ArrayList<>(card.getComments());
 //        this.username = card.getUser().getUsername();
 
     }

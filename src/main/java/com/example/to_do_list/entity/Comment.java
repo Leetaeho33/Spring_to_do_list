@@ -18,19 +18,29 @@ public class Comment extends Time{
     private int id;
     @Column(name = "content", nullable = false)
     private String content;
-    @Column(name = "date", nullable = false)
-    private LocalDateTime dateTime;
 
+    // 카드 하나에 여러 댓글을 달아야 하니까 N의 관계
     @ManyToOne
     @JoinColumn(name = "card_id")
     private Card card;
 
+    // 카드에 여러 유저가 댓글을 달 수 있으니까 N의 관계
+    // 카드 작성자와 댓글 작성자가 일치하지 않을 수 있기 때문에 Comment는 User와 N대 1 관계를 맺어야함.
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public Comment (CommentRequestDto commentRequestDto){
         this.content = commentRequestDto.getContent();
         this.card = commentRequestDto.getCard();
-        this.dateTime = dateTime.now();
-
     }
 
+    public void updateComment(Comment comment){
+        this.content = comment.getContent();
+        this.getCreatedAt();
+        this.getModifiedAt();
+
+
+    }
 
 }
