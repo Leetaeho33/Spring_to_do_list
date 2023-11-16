@@ -1,12 +1,11 @@
 package com.example.to_do_list.entity;
 
 import com.example.to_do_list.dto.CardRequestDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.w3c.dom.stylesheets.LinkStyle;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,31 +27,33 @@ public class Card extends Time{
 //    @Column(name = "complete")
 //    private boolean complete = false;
 
-    @OneToMany(mappedBy = "card")
-    private List<Comment> comments = new ArrayList<>();
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id")
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
-    public Card (CardRequestDto cardRequestDto){
+    public Card (CardRequestDto cardRequestDto, User user){
         this.title = cardRequestDto.getTitle();
         this.content = cardRequestDto.getContent();
-//        this.user = cardRequestDto.getUser();
+        this.user = user;
     }
 
-    public void update(CardRequestDto card){
+    public void updateCard(CardRequestDto card){
         this.title = card.getTitle();
         this.content = card.getContent();
 //        this.complete = card.isComplete();
     }
 
-    public void addComments(Comment comment){
-        comments.add(comment);
+    public void addCommentList(Comment comment){
+        commentList.add(comment);
+//        comment.setCard(this);
     }
 
-    public void deleteComments(Comment comment){
-        comments.remove(comment);
+    public void deleteCommentList(Comment comment){
+        commentList.remove(comment);
     }
 
 }

@@ -2,7 +2,7 @@ package com.example.to_do_list.controller;
 
 import com.example.to_do_list.dto.CardRequestDto;
 import com.example.to_do_list.dto.CardResponseDto;
-import com.example.to_do_list.entity.Card;
+import com.example.to_do_list.dto.UserResponseDto;
 import com.example.to_do_list.service.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +14,9 @@ import java.util.List;
 @RestController
 public class CardController {
     private final CardService cardService;
-    @PostMapping("/creates")
-    public CardResponseDto createCard(@RequestBody CardRequestDto cardRequestDto){
-        return cardService.createCard(cardRequestDto);
+    @PostMapping("/creates/{id}")
+    public CardResponseDto createCard(@RequestBody CardRequestDto cardRequestDto, @PathVariable Long id){
+        return cardService.createCard(cardRequestDto, id);
     }
 
     @PutMapping("/updates/{id}")
@@ -25,13 +25,13 @@ public class CardController {
     }
 
     @GetMapping("/gets")
-    public List<CardResponseDto> getAllCard(){
+    public List<UserResponseDto> getAllCard(){
        return cardService.getAllCard();
     }
 
     @GetMapping("/gets/{id}")
-    public CardResponseDto getCard(@PathVariable long id){
-        return cardService.getCard(id);
+    public UserResponseDto getCard(@PathVariable long id){
+        return cardService.getCardByUserId(id);
     }
 
     @DeleteMapping("/deletes/{id}")

@@ -13,21 +13,21 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/posts/{cardId}")
+    @PostMapping("/posts/{cardId}/{userId}")
     public CardResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto,
-                                         @PathVariable Long cardId){
-        return commentService.createComment(commentRequestDto, cardId);
+                                         @PathVariable Long cardId, @PathVariable Long userId){
+        return commentService.createComment(commentRequestDto, cardId, userId);
     }
 
-    @PutMapping("/updates/{commentId}/{cardId}")
+    @PutMapping("/updates/{commentId}/{cardId}/{userId}")
     public CardResponseDto updateComment(@RequestBody CommentRequestDto commentRequestDto,
                                          @PathVariable Long commentId,
-                                         @PathVariable Long cardId){
-        return commentService.updateComment(commentRequestDto, commentId, cardId);
+                                         @PathVariable Long cardId, @PathVariable Long userId){
+        return commentService.updateComment(commentRequestDto, commentId, cardId, userId);
     }
-    @DeleteMapping("/deletes/{commentId}/{cardId}")
+    @DeleteMapping("/deletes/{commentId}/{cardId}/{userId}")
     public CardResponseDto deleteComment(@PathVariable Long commentId,
-                              @PathVariable Long cardId){
-        return commentService.daleteComment(commentId, cardId);
+                              @PathVariable Long cardId, @PathVariable Long userId){
+        return commentService.daleteComment(commentId, cardId, userId);
     }
 }
