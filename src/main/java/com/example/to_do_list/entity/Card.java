@@ -25,17 +25,15 @@ public class Card extends Time{
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "complete")
-    private boolean complete = false;
+//    @Column(name = "complete")
+//    private boolean complete = false;
 
     @OneToMany(mappedBy = "card")
     private List<Comment> comments = new ArrayList<>();
 
-
 //    @ManyToOne
 //    @JoinColumn(name = "user_id")
 //    private User user;
-
 
     public Card (CardRequestDto cardRequestDto){
         this.title = cardRequestDto.getTitle();
@@ -46,7 +44,7 @@ public class Card extends Time{
     public void update(CardRequestDto card){
         this.title = card.getTitle();
         this.content = card.getContent();
-        this.complete = card.isComplete();
+//        this.complete = card.isComplete();
     }
 
     public void addComments(Comment comment){

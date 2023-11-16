@@ -13,19 +13,19 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/post")
-    public CardResponseDto createComment(CommentRequestDto commentRequestDto,
-                                         @PathVariable Long id){
-        return commentService.createComment(commentRequestDto, id);
+    @PostMapping("/posts/{cardId}")
+    public CardResponseDto createComment(@RequestBody CommentRequestDto commentRequestDto,
+                                         @PathVariable Long cardId){
+        return commentService.createComment(commentRequestDto, cardId);
     }
 
-    @PutMapping("/update")
-    public CardResponseDto updateComment(CommentRequestDto commentRequestDto,
+    @PutMapping("/updates/{commentId}/{cardId}")
+    public CardResponseDto updateComment(@RequestBody CommentRequestDto commentRequestDto,
                                          @PathVariable Long commentId,
                                          @PathVariable Long cardId){
         return commentService.updateComment(commentRequestDto, commentId, cardId);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/deletes/{commentId}/{cardId}")
     public CardResponseDto deleteComment(@PathVariable Long commentId,
                               @PathVariable Long cardId){
         return commentService.daleteComment(commentId, cardId);

@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class CardController {
     private final CardService cardService;
-    @PostMapping("/create")
+    @PostMapping("/creates")
     public CardResponseDto createCard(@RequestBody CardRequestDto cardRequestDto){
         return cardService.createCard(cardRequestDto);
     }

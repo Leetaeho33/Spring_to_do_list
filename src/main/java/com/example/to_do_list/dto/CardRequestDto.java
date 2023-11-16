@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class CardRequestDto {
     private String title;
     private String content;
-    private boolean complete;
+//    private boolean complete;
 //    private User user;
 
 }

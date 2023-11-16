@@ -24,8 +24,8 @@ public class CommentService {
     Comment comment;
 
     public CardResponseDto createComment(CommentRequestDto commentRequestDto, Long id){
-        comment = new Comment(commentRequestDto);
         card = findByIdCard(id);
+        comment = new Comment(commentRequestDto, card);
         card.addComments(comment);
         commentRepository.save(comment);
 
@@ -34,10 +34,11 @@ public class CommentService {
     }
 
     @Transactional
-    public CardResponseDto updateComment(CommentRequestDto commentRequestDto, Long commentId, Long cardId) {
-        Comment commentUpdate = new Comment(commentRequestDto);
-        comment = findByIdComment(commentId);
+    public CardResponseDto updateComment(CommentRequestDto commentRequestDto,
+                                         Long commentId, Long cardId) {
         card = findByIdCard(cardId);
+        Comment commentUpdate = new Comment(commentRequestDto, card);
+        comment = findByIdComment(commentId);
         comment.updateComment(commentUpdate);
         return new CardResponseDto(card);
     }
@@ -46,6 +47,7 @@ public class CommentService {
         card = findByIdCard(cardId);
         comment = findByIdComment(commentId);
         commentRepository.delete(comment);
+        card.deleteComments(comment);
         return new CardResponseDto(card);
     }
 
