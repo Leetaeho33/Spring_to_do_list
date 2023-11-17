@@ -26,6 +26,7 @@
 
 회원 인증이 성공, 해당 할일 카드의 댓글 작성자에게 주어지는 권한
 - 할일 카드 댓글 수정
+
 - 할일 카드 댓글 삭제
 
 **구현에 사용된 기술들**
@@ -36,4 +37,9 @@ Entity의 관계를 설정하고, 영속성 전이를 이용하여 관리합니�
 
 **테스트 방식**
 POST맨으로 API 요청을 보내고, 응답을 받았습니다.
+
+ERD입니다
+![TO DO LIST (2)](https://github.com/Leetaeho33/Spring_to_do_list/assets/148296128/60794a3c-bc29-4292-82a3-18e48249c48e)
+
+USER와 CARD는 1:N의 관계, CARD와 COMMENT는 1:N 관계, USER와 COMMENT는 1:N 관계입니다.
 
