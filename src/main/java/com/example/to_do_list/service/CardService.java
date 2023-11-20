@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,8 +25,8 @@ public class CardService {
     private Card card;
 
     // 할일 카드 작성
-    public CardResponseDto createCard(CardRequestDto cardRequestDto, Long id) {
-        user = searchUser(id);
+    public CardResponseDto createCard(CardRequestDto cardRequestDto, Long userId) {
+        user = searchUser(userId);
         card = new Card(cardRequestDto,user);
         user.addCardList(card);
         cardRepository.save(card);
@@ -34,16 +35,21 @@ public class CardService {
 
     // 할일 카드 수정
     @Transactional
-    public CardResponseDto updateCard(CardRequestDto cardRequestDto, Long id) {
-        card = searchCard(id);
-        card.updateCard(cardRequestDto);
-        return new CardResponseDto(card);
+    public CardResponseDto updateCard(CardRequestDto cardRequestDto, Long cardId, Long userId) {
+        card = searchCard(cardId);
+        user = searchUser(userId);
+        if(Objects.equals(user.getId(), card.getUser().getId())){
+            card.updateCard(cardRequestDto);
+            return new CardResponseDto(card);
+        }else{
+            throw new IllegalArgumentException("카드 작성유저가 아닙니다.");
+        }
     }
 
     // 검색 유저의 할일 카드 보여주기.
     // 유저로 응답해야 유저의 할일카드를 전체 보여줄 수 있음.
-    public UserResponseDto getCardByUserId(Long id) {
-        user = searchUser(id);
+    public UserResponseDto getCardByUserId(Long userId) {
+        user = searchUser(userId);
         return new UserResponseDto(user);
     }
 
@@ -60,9 +66,14 @@ public class CardService {
         return userResponseDtoList;
     }
 
-    public void deleteCard(long id) {
-        card = searchCard(id);
-        cardRepository.delete(card);
+    public void deleteCard(Long cardId, Long userId) {
+        card = searchCard(cardId);
+        user = searchUser(userId);
+        if(Objects.equals(user.getId(), card.getUser().getId())){
+            cardRepository.delete(card);
+        }else{
+            throw new IllegalArgumentException("카드를 작성한 유저가 아닙니다.");
+        }
     }
 
     // 반복되는 메서드는 빼서 사용.
