@@ -43,3 +43,6 @@ ERD입니다
 
 USER와 CARD는 1:N의 관계, CARD와 COMMENT는 1:N 관계, USER와 COMMENT는 1:N 관계입니다.
 
+**API 명세서**
+https://documenter.getpostman.com/view/30925785/2s9Ye8fuxj
+
