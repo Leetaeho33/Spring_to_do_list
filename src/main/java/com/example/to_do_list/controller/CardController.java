@@ -14,14 +14,17 @@ import java.util.List;
 @RestController
 public class CardController {
     private final CardService cardService;
-    @PostMapping("/creates/{id}")
-    public CardResponseDto createCard(@RequestBody CardRequestDto cardRequestDto, @PathVariable Long id){
-        return cardService.createCard(cardRequestDto, id);
+    @PostMapping("/creates/{userId}")
+    public CardResponseDto createCard(@RequestBody CardRequestDto cardRequestDto,
+                                      @PathVariable Long userId){
+        return cardService.createCard(cardRequestDto, userId);
     }
 
-    @PutMapping("/updates/{id}")
-    public CardResponseDto updateCard(@RequestBody CardRequestDto cardRequestDto,@PathVariable Long id){
-        return cardService.updateCard(cardRequestDto, id);
+    @PutMapping("/updates/{cardId}/{userId}")
+    public CardResponseDto updateCard(@RequestBody CardRequestDto cardRequestDto,
+                                      @PathVariable Long cardId,
+                                      @PathVariable Long userId){
+        return cardService.updateCard(cardRequestDto, cardId, userId);
     }
 
     @GetMapping("/gets")
@@ -29,13 +32,13 @@ public class CardController {
        return cardService.getAllCard();
     }
 
-    @GetMapping("/gets/{id}")
-    public UserResponseDto getCard(@PathVariable long id){
-        return cardService.getCardByUserId(id);
+    @GetMapping("/gets/{userId}")
+    public UserResponseDto getCard(@PathVariable Long userId){
+        return cardService.getCardByUserId(userId);
     }
 
-    @DeleteMapping("/deletes/{id}")
-    public void deleteCard(@PathVariable long id){
-        cardService.deleteCard(id);
+    @DeleteMapping("/deletes/{cardId}/{userId}")
+    public void deleteCard(@PathVariable Long cardId, @PathVariable  Long userId){
+        cardService.deleteCard(cardId, userId);
     }
 }
